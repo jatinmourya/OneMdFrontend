@@ -1,5 +1,11 @@
 <mat-card appearance="outlined">
   <form [formGroup]="registerForm" (ngSubmit)="submit(registerForm)">
+    <!-- <mat-form-field>
+      <mat-label>Amount</mat-label>
+      <input matInput type="number" />
+      <span matPrefix>$&nbsp;</span>
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field> -->
     <h2 class="form-header">
       {{ editMode ? "Update Data" : "Registration Form" }}
     </h2>
@@ -186,39 +192,65 @@
       }
     </mat-form-field>
     <!--  -->
-    <div
-      style="display: flex; align-items: center; gap: 10px; margin: 0 0 20px 0"
+    <!-- <mat-divider style="margin: 0 0 20px 0"></mat-divider> -->
+    <mat-card
+      appearance="outlined"
+      style="padding: 20px; padding-bottom: 0; margin-bottom: 20px"
     >
-      Degrees
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin: 0 0 20px 0;
+        "
+      >
+        Degrees Achieved :
 
-      <button type="button" mat-mini-fab (click)="addDegree()">
-        <mat-icon>add</mat-icon>
-      </button>
-    </div>
-    <div formArrayName="degrees">
-      @if(getDegrees['controls'].length) { @for( deg of getDegrees['controls'];
-      let i = $index;track i) {
-
-      <div [formGroupName]="i" style="display: flex; gap: 10px">
-        <mat-form-field>
-          <mat-label>Degree {{ i + 1 }}</mat-label>
-          <input type="text" matInput formControlName="degree" />
-          @if(registerForm.get('degrees.' + i + '.degree')?.touched &&
-          registerForm.get('degrees.' + i + '.degree')?.invalid){
-          <mat-error>
-            @if(registerForm.get('degrees.' + i +
-            '.degree')?.errors?.['required']){
-            <span>Degree {{ i + 1 }} is required.</span>
-            }
-          </mat-error>
-          }
-        </mat-form-field>
-        <button type="button" mat-mini-fab (click)="removeDegree(i)">
-          <mat-icon>delete</mat-icon>
+        <button
+          type="button"
+          mat-mini-fab
+          (click)="addDegree()"
+          style="margin: 0 0 0 auto"
+        >
+          <mat-icon>add</mat-icon>
         </button>
       </div>
-      } }
-    </div>
+
+      <div formArrayName="degrees">
+        @if(getDegrees['controls'].length) { @for( deg of
+        getDegrees['controls']; let i = $index;track i) {
+
+        <div [formGroupName]="i" style="display: flex; gap: 10px">
+          <mat-form-field>
+            <mat-label>Degree {{ i + 1 }}</mat-label>
+            <input type="text" matInput formControlName="degree" />
+            <button
+              type="button"
+              mat-icon-button
+              matSuffix
+              (click)="removeDegree(i)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+
+            @if(registerForm.get('degrees.' + i + '.degree')?.touched &&
+            registerForm.get('degrees.' + i + '.degree')?.invalid){
+            <mat-error>
+              @if(registerForm.get('degrees.' + i +
+              '.degree')?.errors?.['required']){
+              <span>Degree {{ i + 1 }} is required.</span>
+              }
+            </mat-error>
+            }
+          </mat-form-field>
+          <!-- <button type="button" mat-mini-fab (click)="removeDegree(i)">
+          <mat-icon>delete</mat-icon>
+        </button> -->
+        </div>
+        } }
+      </div>
+    </mat-card>
     <button
       type="submit"
       style="align-self: center; padding: 0 50px"

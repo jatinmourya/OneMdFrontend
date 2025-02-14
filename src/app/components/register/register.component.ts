@@ -7,6 +7,7 @@ import {
   AbstractControl,
   FormArray,
   FormBuilder,
+  FormGroup,
   ReactiveFormsModule,
   ValidationErrors,
   ValidatorFn,
@@ -20,6 +21,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
 @Component({
   selector: 'app-register',
   imports: [
@@ -32,6 +34,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
+    MatDividerModule,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
@@ -56,7 +59,7 @@ export class RegisterComponent {
         }
       });
     } else {
-      // this.registerForm = this.setForm();
+      this.registerForm = this.setForm();
     }
 
     console.log(this.registerForm.controls?.['degrees']);
@@ -79,7 +82,7 @@ export class RegisterComponent {
     };
   }
 
-  registerForm = this.fb.group(
+  registerForm: any = this.fb.group(
     {
       name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
@@ -120,6 +123,7 @@ export class RegisterComponent {
         date_of_graduation: ['2015-02-02', [Validators.required]],
         degrees: this.fb.array([
           this.fb.group({ degree: ['MBBS', [Validators.required]] }),
+          this.fb.group({ degree: ['BSC', [Validators.required]] }),
         ]),
         online_consult_fees: ['1000', [Validators.required, Validators.min(0)]],
         offline_consult_fees: [
@@ -140,6 +144,10 @@ export class RegisterComponent {
   }
 
   removeDegree(i: any) {
+    // console.log(i);
+    // console.log(this.getDegrees.controls.length);
+    // console.log(this.getDegrees.value);
+
     this.getDegrees.removeAt(i);
   }
 
