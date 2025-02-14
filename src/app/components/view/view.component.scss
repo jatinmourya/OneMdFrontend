@@ -1,0 +1,39 @@
+:host {
+  display: flex;
+  justify-content: center;
+}
+table {
+  width: 100%;
+  //   border: 1px solid gray;
+  border-collapse: collapse;
+  max-width: 800px;
+}
+th,
+td {
+  vertical-align: top;
+  text-align: left;
+  padding: 10px;
+  // border: 1px solid rgb(224, 224, 224);
+}
+tr:first-child {
+  th,
+  td {
+    font-size: 200%;
+    font-weight: 500;
+  }
+}
+.delete-icon {
+  transition: 0.35s;
+  opacity: 0;
+  // display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+mat-card:hover {
+  .delete-icon {
+    opacity: 1;
+    transition: 0.35s;
+    //   display: block;
+  }
+}

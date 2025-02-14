@@ -1,0 +1,258 @@
+<mat-card appearance="outlined">
+  <form [formGroup]="registerForm" (ngSubmit)="submit(registerForm)">
+    <h2 class="form-header">
+      {{ editMode ? "Update Data" : "Registration Form" }}
+    </h2>
+    <!--  -->
+    <mat-form-field>
+      <mat-label>Full Name</mat-label>
+      <input matInput formControlName="name" />
+      @if(registerForm.controls.name.touched &&
+      registerForm.controls.name.invalid){
+      <mat-error>
+        @if(registerForm.controls.name.errors?.['required']){
+        <span>Name Number is required.</span>
+        } @if(registerForm.controls.name.errors?.['pattern']){
+        <span>Invalid Name Number</span>
+        }
+      </mat-error>
+      }
+    </mat-form-field>
+    <!--  -->
+    <mat-form-field>
+      <mat-label>Mobile</mat-label>
+      <input matInput formControlName="mobile" />
+      <!-- <mat-icon matSuffix>contacts</mat-icon> -->
+
+      @if(registerForm.controls.mobile.touched &&
+      registerForm.controls.mobile.invalid){
+      <mat-error>
+        @if(registerForm.controls.mobile.errors?.['required']){
+        <span>Mobile Number is required.</span>
+        } @if(registerForm.controls.mobile.errors?.['pattern']){
+        <span>Invalid Mobile Number</span>
+        }
+      </mat-error>
+      }
+    </mat-form-field>
+    <!--  -->
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" />
+      <!-- <mat-icon matSuffix>email</mat-icon> -->
+
+      @if(registerForm.controls.email.touched &&
+      registerForm.controls.email.invalid){
+      <mat-error>
+        @if(registerForm.controls.email.errors?.['required']){
+        <span>Email is required.</span>
+        } @if(registerForm.controls.email.errors?.['pattern']){
+        <span>Invalid Email Address</span>
+        }
+      </mat-error>
+      }
+    </mat-form-field>
+    <!--  -->
+    <mat-form-field>
+      <mat-label>Set Password</mat-label>
+      <input
+        type="password"
+        matInput
+        formControlName="password"
+        [type]="hide1() ? 'password' : 'text'"
+      />
+      <button
+        type="button"
+        mat-icon-button
+        matSuffix
+        (click)="clickEvent1($event)"
+        [attr.aria-label]="'Hide1 password'"
+        [attr.aria-pressed]="hide1()"
+      >
+        <mat-icon>{{ hide1() ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+      @if(registerForm.hasError('passwordMismatch') ){
+      <mat-hint>
+        <span style="color: #ba1a1a">Passwords do not match.</span>
+      </mat-hint>
+      } @if(registerForm.controls.password.touched &&
+      registerForm.controls.password.invalid){
+      <mat-error>
+        @if(registerForm.controls.password.errors?.['required']){
+        <span>Password is required.</span>
+        } @if(registerForm.controls.password.errors?.['pattern']){
+        <span
+          >Password must have minimum 8 characters, one special character, one
+          digit</span
+        >
+        }
+      </mat-error>
+      }
+    </mat-form-field>
+    <!--  -->
+    <mat-form-field>
+      <mat-label>Confirm Password</mat-label>
+      <input
+        type="password"
+        matInput
+        formControlName="confirm_password"
+        [type]="hide2() ? 'password' : 'text'"
+      />
+      <button
+        type="button"
+        mat-icon-button
+        matSuffix
+        (click)="clickEvent2($event)"
+        [attr.aria-label]="'Hide1 password'"
+        [attr.aria-pressed]="hide2()"
+      >
+        <mat-icon>{{ hide2() ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+      @if(registerForm.hasError('passwordMismatch') ){
+      <mat-hint>
+        <span style="color: #ba1a1a">Passwords do not match.</span>
+      </mat-hint>
+      } @if(registerForm.controls.confirm_password.touched &&
+      registerForm.controls.confirm_password.invalid){
+      <mat-error>
+        @if(registerForm.controls.confirm_password.errors?.['required']){
+        <span>Confirm Password is required.</span>
+        }@if(registerForm.controls.confirm_password.errors?.['pattern']){
+        <span
+          >Password must have minimum 8 characters, one special character, one
+          digit</span
+        >
+        }
+      </mat-error>
+      }
+    </mat-form-field>
+    <!--  -->
+    <mat-form-field>
+      <mat-label>Online Consult Fee</mat-label>
+      <input type="number" matInput formControlName="online_consult_fees" />
+      <span matTextPrefix>₹&nbsp;</span>
+      <!-- <mat-icon matSuffix>currency_rupee</mat-icon> -->
+      @if(registerForm.controls.online_consult_fees.touched &&
+      registerForm.controls.online_consult_fees.invalid){
+      <mat-error>
+        @if(registerForm.controls.online_consult_fees.errors?.['required']){
+        <span>Online Consult Fee is required.</span>
+        } @if(registerForm.controls.online_consult_fees.errors?.['min']){
+        <span>Invalid Online Consult Fee</span>
+        }
+      </mat-error>
+      }
+    </mat-form-field>
+    <!--  -->
+    <mat-form-field>
+      <mat-label>Offline Consult Fee</mat-label>
+      <input type="number" matInput formControlName="offline_consult_fees" />
+      <span matTextPrefix>₹&nbsp;</span>
+      <!-- <mat-icon matSuffix>currency_rupee</mat-icon> -->
+      @if(registerForm.controls.offline_consult_fees.touched &&
+      registerForm.controls.offline_consult_fees.invalid){
+      <mat-error>
+        @if(registerForm.controls.offline_consult_fees.errors?.['required']){
+        <span>Offline Consult Fee is required.</span>
+        } @if(registerForm.controls.offline_consult_fees.errors?.['min']){
+        <span>Invalid Offline Consult Fee</span>
+        }
+      </mat-error>
+      }
+    </mat-form-field>
+    <!--  -->
+    <mat-form-field (click)="picker.open()">
+      <mat-label>Date of graduation</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        formControlName="date_of_graduation"
+      />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+
+      @if(registerForm.controls.date_of_graduation.touched &&
+      registerForm.controls.date_of_graduation.invalid){
+      <mat-error>
+        @if(registerForm.controls.date_of_graduation.errors?.['required']){
+        <span>Date Of Graduation is required.</span>
+        } @if(registerForm.controls.date_of_graduation.errors?.['pattern']){
+        <span>Invalid Date Of Graduation</span>
+        }
+      </mat-error>
+      }
+    </mat-form-field>
+    <!--  -->
+    <div
+      style="display: flex; align-items: center; gap: 10px; margin: 0 0 20px 0"
+    >
+      Degrees
+
+      <button type="button" mat-mini-fab (click)="addDegree()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <div formArrayName="degrees">
+      @if(getDegrees['controls'].length) { @for( deg of getDegrees['controls'];
+      let i = $index;track i) {
+
+      <div [formGroupName]="i" style="display: flex; gap: 10px">
+        <mat-form-field>
+          <mat-label>Degree {{ i + 1 }}</mat-label>
+          <input type="text" matInput formControlName="degree" />
+          @if(registerForm.get('degrees.' + i + '.degree')?.touched &&
+          registerForm.get('degrees.' + i + '.degree')?.invalid){
+          <mat-error>
+            @if(registerForm.get('degrees.' + i +
+            '.degree')?.errors?.['required']){
+            <span>Degree {{ i + 1 }} is required.</span>
+            }
+          </mat-error>
+          }
+        </mat-form-field>
+        <button type="button" mat-mini-fab (click)="removeDegree(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      } }
+    </div>
+    <button
+      type="submit"
+      style="align-self: center; padding: 0 50px"
+      mat-flat-button
+      [disabled]="registerForm.invalid"
+    >
+      {{ editMode ? "Update" : "Submit" }}
+    </button>
+  </form>
+</mat-card>
+
+<ng-template #dialogbox>
+  <h2 mat-dialog-title>Are You Sure ?</h2>
+  <mat-dialog-content class="mat-typography">
+    <!-- <h3>Develop across all platforms</h3> -->
+    <p>Update This Item</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button type="button" mat-button mat-dialog-close>No</button>
+    <button type="button" mat-button [mat-dialog-close]="true" cdkFocusInitial>
+      Yes
+    </button>
+  </mat-dialog-actions>
+</ng-template>
+
+<ng-template #dialogbox2>
+  <h2 mat-dialog-title>
+    Data is {{ editMode ? "Updated" : "Registered" }} Successfully.
+  </h2>
+  <mat-dialog-content
+    >Thanks for
+    {{ editMode ? "Updating" : "Registering" }} Data</mat-dialog-content
+  >
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+  </mat-dialog-actions>
+</ng-template>

@@ -1,0 +1,76 @@
+@if(list?.length && !isLoading){
+<div style="width: 100%; display: flex; justify-content: center">
+  <div class="cards">
+    <mat-card class="card" appearance="outlined" *ngFor="let item of list">
+      <mat-card-header>
+        <mat-card-title
+          ><strong>{{ "Dr. " + item.name }} </strong></mat-card-title
+        >
+        <!-- <button mat-icon-button style="margin-left: auto">
+        <mat-icon>delete</mat-icon>
+    </button> -->
+      </mat-card-header>
+      <mat-card-content>
+        <small>{{ "Experience " + item.experience }}</small
+        ><br />
+        <small *ngFor="let deg of item.degrees">{{ deg.degree + " " }}</small>
+        <div style="margin-top: 10px">Fees</div>
+        <small>Online Consult : {{ item.online_consult_fees }}</small
+        ><br />
+        <small>In Persion Consult : {{ item.offline_consult_fees }}</small>
+      </mat-card-content>
+      <mat-card-footer class="card-footer">
+        <!-- <mat-chip-set style="display: flex; width: 100%">
+          <button
+            type="submit"
+            style="width: 100%; margin-left: 10px"
+            mat-flat-button
+            
+          >
+            Book Appointment
+          </button>
+        </mat-chip-set> -->
+        <mat-card-actions>
+          <button mat-button [routerLink]="'/view/' + item._id">
+            Book Appointment
+          </button>
+        </mat-card-actions>
+      </mat-card-footer>
+      <div class="delete-icon">
+        <button mat-icon-button [routerLink]="'/edit/' + item._id">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteItem(item._id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </mat-card>
+  </div>
+</div>
+
+} @else if(isLoading){
+<div
+  style="
+    height: 75vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  "
+>
+  <mat-spinner strokeWidth="5" diameter="75"></mat-spinner>
+</div>
+} @else{
+<p style="text-align: center">List Is Empty Right Now</p>
+}
+<ng-template #dialogbox>
+  <h2 mat-dialog-title>Are You Sure ?</h2>
+  <mat-dialog-content class="mat-typography">
+    <!-- <h3>Develop across all platforms</h3> -->
+    <p>Delete This Item</p>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>No</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Yes</button>
+  </mat-dialog-actions>
+</ng-template>

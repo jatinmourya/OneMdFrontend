@@ -1,0 +1,42 @@
+:host {
+  display: flex;
+  justify-content: center;
+}
+mat-card {
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  max-width: 800px;
+  align-items: center;
+}
+form {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  // padding: 20px;
+  // border: 1px solid rgb(206, 206, 206);
+}
+
+.form-header {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+mat-form-field {
+  margin: 0 0 20px 0;
+  width: 100%;
+}
+
+/* date field css */
+// HIde Increment | Decrement arrow from number input field
+// HIde Increment | Decrement arrow from number input field
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+}

@@ -1,0 +1,30 @@
+.cards {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  // justify-content: center;
+
+  .card {
+    width: 32%;
+    // max-width: 50%;
+    min-width: 300px;
+  }
+
+  .delete-icon {
+    transition: 0.35s;
+    opacity: 0;
+    // display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .card:hover {
+    .delete-icon {
+      opacity: 1;
+      transition: 0.35s;
+      //   display: block;
+    }
+  }
+}
