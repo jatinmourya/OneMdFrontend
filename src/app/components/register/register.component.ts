@@ -113,11 +113,11 @@ export class RegisterComponent {
         ],
         mobile: ['9619435736', [Validators.required]],
         password: [
-          'Jatin1234!',
+          '',
           [Validators.required, Validators.pattern(this.passwdPattern)],
         ],
         confirm_password: [
-          'Jatin1234!',
+          '',
           [Validators.required, Validators.pattern(this.passwdPattern)],
         ],
         date_of_graduation: ['2015-02-02', [Validators.required]],
